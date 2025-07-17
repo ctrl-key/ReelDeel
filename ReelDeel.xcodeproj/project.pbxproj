@@ -6,20 +6,84 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		7ECB5E792E29061B009C2C94 /* ShareReel.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 7ECB5E6F2E29061B009C2C94 /* ShareReel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7ECB5E772E29061B009C2C94 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7ECB5E532E2903D1009C2C94 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7ECB5E6E2E29061B009C2C94;
+			remoteInfo = ShareReel;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7ECB5E7E2E29061B009C2C94 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				7ECB5E792E29061B009C2C94 /* ShareReel.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		7ECB5E5B2E2903D1009C2C94 /* ReelDeel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReelDeel.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7ECB5E6F2E29061B009C2C94 /* ShareReel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ShareReel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		7ECB5E7A2E29061B009C2C94 /* Exceptions for "ShareReel" folder in "ShareReel" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 7ECB5E6E2E29061B009C2C94 /* ShareReel */;
+		};
+		7ECB5EA12E290E2D009C2C94 /* Exceptions for "ReelDeel" folder in "ReelDeel" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 7ECB5E5A2E2903D1009C2C94 /* ReelDeel */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		7ECB5E5D2E2903D1009C2C94 /* ReelDeel */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				7ECB5EA12E290E2D009C2C94 /* Exceptions for "ReelDeel" folder in "ReelDeel" target */,
+			);
 			path = ReelDeel;
+			sourceTree = "<group>";
+		};
+		7ECB5E702E29061B009C2C94 /* ShareReel */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				7ECB5E7A2E29061B009C2C94 /* Exceptions for "ShareReel" folder in "ShareReel" target */,
+			);
+			path = ShareReel;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		7ECB5E582E2903D1009C2C94 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7ECB5E6C2E29061B009C2C94 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -33,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				7ECB5E5D2E2903D1009C2C94 /* ReelDeel */,
+				7ECB5E702E29061B009C2C94 /* ShareReel */,
 				7ECB5E5C2E2903D1009C2C94 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				7ECB5E5B2E2903D1009C2C94 /* ReelDeel.app */,
+				7ECB5E6F2E29061B009C2C94 /* ShareReel.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -55,10 +121,12 @@
 				7ECB5E572E2903D1009C2C94 /* Sources */,
 				7ECB5E582E2903D1009C2C94 /* Frameworks */,
 				7ECB5E592E2903D1009C2C94 /* Resources */,
+				7ECB5E7E2E29061B009C2C94 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				7ECB5E782E29061B009C2C94 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				7ECB5E5D2E2903D1009C2C94 /* ReelDeel */,
@@ -69,6 +137,28 @@
 			productName = ReelDeel;
 			productReference = 7ECB5E5B2E2903D1009C2C94 /* ReelDeel.app */;
 			productType = "com.apple.product-type.application";
+		};
+		7ECB5E6E2E29061B009C2C94 /* ShareReel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7ECB5E7B2E29061B009C2C94 /* Build configuration list for PBXNativeTarget "ShareReel" */;
+			buildPhases = (
+				7ECB5E6B2E29061B009C2C94 /* Sources */,
+				7ECB5E6C2E29061B009C2C94 /* Frameworks */,
+				7ECB5E6D2E29061B009C2C94 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				7ECB5E702E29061B009C2C94 /* ShareReel */,
+			);
+			name = ShareReel;
+			packageProductDependencies = (
+			);
+			productName = ShareReel;
+			productReference = 7ECB5E6F2E29061B009C2C94 /* ShareReel.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -81,6 +171,9 @@
 				LastUpgradeCheck = 1640;
 				TargetAttributes = {
 					7ECB5E5A2E2903D1009C2C94 = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					7ECB5E6E2E29061B009C2C94 = {
 						CreatedOnToolsVersion = 16.4;
 					};
 				};
@@ -100,12 +193,20 @@
 			projectRoot = "";
 			targets = (
 				7ECB5E5A2E2903D1009C2C94 /* ReelDeel */,
+				7ECB5E6E2E29061B009C2C94 /* ShareReel */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		7ECB5E592E2903D1009C2C94 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7ECB5E6D2E29061B009C2C94 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +223,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7ECB5E6B2E29061B009C2C94 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7ECB5E782E29061B009C2C94 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7ECB5E6E2E29061B009C2C94 /* ShareReel */;
+			targetProxy = 7ECB5E772E29061B009C2C94 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		7ECB5E662E2903D3009C2C94 /* Debug */ = {
@@ -251,11 +367,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ReelDeel/ReelDeel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z9VXC8PQ4J;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ReelDeel/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -279,11 +397,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ReelDeel/ReelDeel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z9VXC8PQ4J;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ReelDeel/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -296,6 +416,58 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.genai.ReelDeel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		7ECB5E7C2E29061B009C2C94 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ShareReel/ShareReel.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z9VXC8PQ4J;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ShareReel/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ShareReel;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.genai.ReelDeel.ShareReel;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7ECB5E7D2E29061B009C2C94 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ShareReel/ShareReel.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z9VXC8PQ4J;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ShareReel/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ShareReel;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.genai.ReelDeel.ShareReel;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -319,6 +491,15 @@
 			buildConfigurations = (
 				7ECB5E692E2903D3009C2C94 /* Debug */,
 				7ECB5E6A2E2903D3009C2C94 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7ECB5E7B2E29061B009C2C94 /* Build configuration list for PBXNativeTarget "ShareReel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7ECB5E7C2E29061B009C2C94 /* Debug */,
+				7ECB5E7D2E29061B009C2C94 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

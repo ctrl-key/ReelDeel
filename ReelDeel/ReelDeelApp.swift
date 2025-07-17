@@ -10,23 +10,19 @@ import SwiftData
 
 @main
 struct ReelDeelApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
-
+    @StateObject var sharedUrls = SharedURLs()
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(sharedUrls)
+                .onOpenURL { url in
+                    if let sharedDefaults = UserDefaults(suiteName: "group.com.genai.reelDeel"),
+                       let urlString = sharedDefaults.string(forKey: "sharedURL"),
+                       let url = URL(string: urlString) {
+                        sharedUrls.addUrlToList(url.absoluteString)
+                        sharedDefaults.removeObject(forKey: "sharedURL") // optional: clear after read
+                    }
+                }
         }
-        .modelContainer(sharedModelContainer)
     }
 }
