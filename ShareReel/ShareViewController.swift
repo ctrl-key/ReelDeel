@@ -56,11 +56,46 @@ class ShareViewController: UIViewController, SharePostViewDelegate {
     }
     
     func sharePostToTheApp() {
-        if let url = URL(string: "ReelDeelSchema://") {
-            openURL(url)
-        } else {
-            print("the url is invalid")
+        let configName = "com.genai.ReelDeel.BackgroundSessionConfig"
+        let sessionConfig = URLSessionConfiguration.background(withIdentifier: configName)
+        // Extensions aren't allowed their own cache disk space. Need to share with application
+        sessionConfig.sharedContainerIdentifier = "group.com.genai.reelDeel"
+        let session = URLSession(configuration: sessionConfig, delegate: self, delegateQueue: nil)
+        guard let request = prepareUrlRequest(urlString: "https://1de437f1e4f6.ngrok-free.app/analyze") else {
+            print("Problem occured while creating URLRequest")
+            return
         }
+        
+        let task = session.dataTask(with: request)
+        task.resume()
+//        Commenting this code because we dont want to open the app when user saves a url
+//        if let url = URL(string: "ReelDeelSchema://") {
+//            openURL(url)
+//        } else {
+//            print("the url is invalid")
+//        }
+    }
+    
+    func prepareUrlRequest(urlString: String) -> URLRequest? {
+        guard let url = URL(string: urlString) else {
+            print ("invalid url")
+            return nil
+        }
+        var request = URLRequest(url: url)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "POST"
+        let jsonObject = NSMutableDictionary()
+        jsonObject["username"] = "instorefashions"
+        
+        // Create the JSON payload
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: jsonObject, options: [])
+            request.httpBody = jsonData
+        } catch let error {
+            print("JSON Error: \(error.localizedDescription)")
+            return nil
+        }
+        return request
     }
     
     /// Open URL Code
@@ -81,4 +116,26 @@ class ShareViewController: UIViewController, SharePostViewDelegate {
     }
     
 
+}
+
+extension ShareViewController: URLSessionDataDelegate {
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+        do {
+            if let json = try JSONSerialization.jsonObject(with: data, options: [.fragmentsAllowed]) as? [String: Any] {
+                print("Recieved data \(data)")
+                print("Recieved json \(json)")
+            } else if let jsonArray = try JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] {
+                print("Recieved json \(jsonArray)")
+            }
+        } catch let error{
+            print("Recieved data \(data)")
+            print("JsonSerialization \(error)")
+        }
+    }
+    //This function is to detect any errors
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: (any Error)?) {
+        if let error = error {
+            print("there was an error \(error)")
+        }
+    }
 }
