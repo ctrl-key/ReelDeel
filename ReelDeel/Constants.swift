@@ -10,3 +10,5 @@ enum TabItem {
     case categories
     case search
 }
+
+let CLASSIFY_SERVICE_URL = "https://60b5440a72da.ngrok-free.app/classify"

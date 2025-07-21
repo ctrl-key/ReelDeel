@@ -18,7 +18,7 @@ struct SharePostView: View {
         NavigationStack {
             Text("URL: \(sharedUrl)")
             Button {
-                delegate?.sharePostToTheApp()
+                delegate?.sharePostToTheApp(sharedUrl)
                 delegate?.sharePostViewClose()
             } label: {
                 Text("Save")
@@ -39,5 +39,5 @@ struct SharePostView: View {
 
 protocol SharePostViewDelegate: AnyObject {
     func sharePostViewClose()
-    func sharePostToTheApp()
+    func sharePostToTheApp(_ url: URL)
 }

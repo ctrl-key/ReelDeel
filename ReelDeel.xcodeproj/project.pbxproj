@@ -54,6 +54,15 @@
 			);
 			target = 7ECB5E5A2E2903D1009C2C94 /* ReelDeel */;
 		};
+		7ECB5ED72E2D873F009C2C94 /* Exceptions for "ReelDeel" folder in "ShareReel" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Constants.swift,
+				DataObjects/DataObjects.swift,
+				DataObjects/VideoDataService.swift,
+			);
+			target = 7ECB5E6E2E29061B009C2C94 /* ShareReel */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -61,6 +70,7 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				7ECB5EA12E290E2D009C2C94 /* Exceptions for "ReelDeel" folder in "ReelDeel" target */,
+				7ECB5ED72E2D873F009C2C94 /* Exceptions for "ReelDeel" folder in "ShareReel" target */,
 			);
 			path = ReelDeel;
 			sourceTree = "<group>";
@@ -294,7 +304,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -352,7 +362,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;

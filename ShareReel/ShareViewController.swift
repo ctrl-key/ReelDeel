@@ -8,8 +8,22 @@
 import UIKit
 import Social
 import SwiftUI
+import SwiftData
 
 class ShareViewController: UIViewController, SharePostViewDelegate {
+    let sharedModelContainer: ModelContainer = {
+        let groupID = "group.com.genai.reelDeel"
+        let grpContainer = ModelConfiguration.GroupContainer.identifier(groupID)
+        let config = ModelConfiguration(groupContainer: grpContainer)
+        
+        do {
+            let container = try ModelContainer(for: VideoDataModel.self, configurations: config)
+            VideoDataService.shared.modelContext = container.mainContext
+            return container
+        } catch {
+            fatalError("Failed to create shared ModelContainer: \(error)")
+        }
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         if let item = extensionContext?.inputItems.first as? NSExtensionItem,
@@ -24,7 +38,6 @@ class ShareViewController: UIViewController, SharePostViewDelegate {
                                 sharedDefaults.set(url.absoluteString, forKey: "sharedURL")
                                 sharedDefaults.synchronize()
                             }
-                            // Optionally pass it to your main app via App Group, UserDefaults, etc.
                             DispatchQueue.main.async {
                                 let contentView = UIHostingController(rootView: SharePostView(url: url, delegate: self))
                                 self.addChild(contentView)
@@ -55,17 +68,18 @@ class ShareViewController: UIViewController, SharePostViewDelegate {
         self.close()
     }
     
-    func sharePostToTheApp() {
+    func sharePostToTheApp(_ url: URL) {
         let configName = "com.genai.ReelDeel.BackgroundSessionConfig"
         let sessionConfig = URLSessionConfiguration.background(withIdentifier: configName)
         // Extensions aren't allowed their own cache disk space. Need to share with application
         sessionConfig.sharedContainerIdentifier = "group.com.genai.reelDeel"
         let session = URLSession(configuration: sessionConfig, delegate: self, delegateQueue: nil)
-        guard let request = prepareUrlRequest(urlString: "https://1de437f1e4f6.ngrok-free.app/analyze") else {
+        guard let videoUrl = url.removingQueryParameters,
+              let request = prepareUrlRequest(urlString: CLASSIFY_SERVICE_URL, videoUrl: videoUrl.absoluteString)
+        else {
             print("Problem occured while creating URLRequest")
             return
         }
-        
         let task = session.dataTask(with: request)
         task.resume()
 //        Commenting this code because we dont want to open the app when user saves a url
@@ -76,7 +90,7 @@ class ShareViewController: UIViewController, SharePostViewDelegate {
 //        }
     }
     
-    func prepareUrlRequest(urlString: String) -> URLRequest? {
+    func prepareUrlRequest(urlString: String, videoUrl: String) -> URLRequest? {
         guard let url = URL(string: urlString) else {
             print ("invalid url")
             return nil
@@ -85,11 +99,11 @@ class ShareViewController: UIViewController, SharePostViewDelegate {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "POST"
         let jsonObject = NSMutableDictionary()
-        jsonObject["username"] = "instorefashions"
-        
+        jsonObject["url"] = videoUrl
         // Create the JSON payload
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: jsonObject, options: [])
+            print("json data is \(jsonData)")
             request.httpBody = jsonData
         } catch let error {
             print("JSON Error: \(error.localizedDescription)")
@@ -122,10 +136,13 @@ extension ShareViewController: URLSessionDataDelegate {
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
         do {
             if let json = try JSONSerialization.jsonObject(with: data, options: [.fragmentsAllowed]) as? [String: Any] {
-                print("Recieved data \(data)")
                 print("Recieved json \(json)")
+                addVideoData(title: json["title"] as? String ?? "Default Title")
             } else if let jsonArray = try JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] {
                 print("Recieved json \(jsonArray)")
+//                for json in jsonArray {
+//                    addVideoData(title: json["video-url"] as? String ?? "")
+//                }
             }
         } catch let error{
             print("Recieved data \(data)")
@@ -137,5 +154,21 @@ extension ShareViewController: URLSessionDataDelegate {
         if let error = error {
             print("there was an error \(error)")
         }
+    }
+}
+
+extension ShareViewController {
+    // You can use the same approach for other operations like fetch, delete, query, sort, etc...
+    func addVideoData(title: String) {
+        let videoData = VideoDataModel(videoUrl: title)
+        VideoDataService.shared.add(videoData)
+    }
+}
+
+extension URL {
+    var removingQueryParameters: URL? {
+        var components = URLComponents(url: self, resolvingAgainstBaseURL: false)
+        components?.queryItems = nil
+        return components?.url
     }
 }

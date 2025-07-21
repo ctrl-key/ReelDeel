@@ -11,18 +11,24 @@ import SwiftData
 @main
 struct ReelDeelApp: App {
     @StateObject var sharedUrls = SharedURLs()
+    let sharedModelContainer: ModelContainer = {
+        let groupID = "group.com.genai.reelDeel" // Replace with your actual App Group ID
+        let grpContainer = ModelConfiguration.GroupContainer.identifier(groupID)
+        //let containerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: groupID)!
+        let config = ModelConfiguration(groupContainer: grpContainer)
+        
+        do {
+            let container = try ModelContainer(for: VideoDataModel.self, configurations: config)
+            VideoDataService.shared.modelContext = container.mainContext
+            return container
+        } catch {
+            fatalError("Failed to create shared ModelContainer: \(error)")
+        }
+    }()
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(sharedUrls)
-                .onOpenURL { url in
-                    if let sharedDefaults = UserDefaults(suiteName: "group.com.genai.reelDeel"),
-                       let urlString = sharedDefaults.string(forKey: "sharedURL"),
-                       let url = URL(string: urlString) {
-                        sharedUrls.addUrlToList(url.absoluteString)
-                        sharedDefaults.removeObject(forKey: "sharedURL") // optional: clear after read
-                    }
-                }
-        }
+        }.modelContainer(sharedModelContainer)
     }
 }
